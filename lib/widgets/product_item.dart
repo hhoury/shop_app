@@ -14,7 +14,7 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final product = Provider.of<Product>(context);
+    final product = Provider.of<Product>(context, listen: false);
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
@@ -31,28 +31,32 @@ class ProductItem extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        footer: GridTileBar(
-          leading: IconButton(
-            onPressed: () {
-              product.toggleFavoriteStatus();
-            },
-            icon: Icon(
-                product.isFavorite ? Icons.favorite : Icons.favorite_border),
-            color: Theme.of(context).colorScheme.secondary,
-          ),
-          title: Text(
-            product.title,
-            textAlign: TextAlign.center,
-          ),
-          trailing: IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.shopping_cart,
+        footer: Consumer<Product>(
+            builder: (BuildContext context, product, Widget? child) {
+          // child never changes, doesn't depend on data
+          return GridTileBar(
+            leading: IconButton(
+              onPressed: () {
+                product.toggleFavoriteStatus();
+              },
+              icon: Icon(
+                  product.isFavorite ? Icons.favorite : Icons.favorite_border),
+              color: Theme.of(context).colorScheme.secondary,
             ),
-            color: Theme.of(context).colorScheme.secondary,
-          ),
-          backgroundColor: Colors.black87,
-        ),
+            title: Text(
+              product.title,
+              textAlign: TextAlign.center,
+            ),
+            trailing: IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.shopping_cart,
+              ),
+              color: Theme.of(context).colorScheme.secondary,
+            ),
+            backgroundColor: Colors.black87,
+          );
+        }),
       ),
     );
   }
