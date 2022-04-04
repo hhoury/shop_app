@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors, deprecated_member_use, prefer_if_null_operators, unnecessary_null_comparison
+
 import 'package:flutter/material.dart';
 
 class Badge extends StatelessWidget {
@@ -37,6 +39,7 @@ class Badge extends StatelessWidget {
             child: Text(
               value,
               textAlign: TextAlign.center,
+              // ignore: prefer_const_constructors
               style: TextStyle(
                 fontSize: 10,
               ),
