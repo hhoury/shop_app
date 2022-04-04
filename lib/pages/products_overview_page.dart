@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/cart.dart';
+import '../widgets/badge.dart';
 import '../widgets/products_grid.dart';
 
 // ignore: constant_identifier_names
@@ -40,7 +43,18 @@ class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
                   child: Text('Show All'), value: FilterOptions.All),
             ],
             icon: const Icon(Icons.more_vert),
-          )
+          ),
+          Consumer<Cart>(
+              builder: (_, cart, ch) => 
+              Badge( child: ch!,
+                  value: cart.itemsCount.toString(),
+                  color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  child: IconButton(
+                      onPressed: () {}, icon: Icon(Icons.shopping_cart)
+                      ),
+                  ),
+                  
         ],
       ),
       body: ProductsGrid(_showOnlyFavorites),
