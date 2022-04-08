@@ -2,7 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shop_app/pages/cart_page.dart';
+import '../pages/cart_page.dart';
+import '../widgets/app_drawer.dart';
 import '../providers/cart.dart';
 import '../widgets/badge.dart';
 import '../widgets/products_grid.dart';
@@ -48,20 +49,20 @@ class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
             icon: const Icon(Icons.more_vert),
           ),
           Consumer<Cart>(
-              builder: (_, cart, ch) => 
-              Badge( child: ch!,
-                  value: cart.itemsCount.toString(),
-                  color: Theme.of(context).colorScheme.secondary,
-                  ),
-                  child: IconButton(
-                      onPressed: () {
-                        Navigator.of(context).pushNamed(CartPage.routeName);
-                      }, icon: Icon(Icons.shopping_cart)
-                      ),
-                  ),
-                  
+            builder: (_, cart, ch) => Badge(
+              child: ch!,
+              value: cart.itemsCount.toString(),
+              color: Theme.of(context).colorScheme.secondary,
+            ),
+            child: IconButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed(CartPage.routeName);
+                },
+                icon: Icon(Icons.shopping_cart)),
+          ),
         ],
       ),
+      drawer: AppDrawer(),
       body: ProductsGrid(_showOnlyFavorites),
     );
   }
