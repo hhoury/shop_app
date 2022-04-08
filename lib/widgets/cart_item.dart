@@ -1,32 +1,42 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/cart.dart';
 
 class CartItem extends StatelessWidget {
   final String id;
+  final String productId;
+
   final double price;
   final int quantity;
   final String title;
 
-  CartItem(
-      {required this.id,
-      required this.price,
-      required this.title,
-      required this.quantity});
+  CartItem({
+    required this.id,
+    required this.productId,
+    required this.price,
+    required this.title,
+    required this.quantity,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Dismissible(
-      
       key: ValueKey(id),
       background: Container(
-          color: Theme.of(context).errorColor,
-          child: Icon(Icons.delete, color: Colors.white, size: 40),
-          alignment: Alignment.centerRight,
-          padding: EdgeInsets.only(right: 20),
-          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),// to make the effect only behind the card
-          ),
-          direction: DismissDirection.endToStart,
+        color: Theme.of(context).errorColor,
+        child: const Icon(Icons.delete, color: Colors.white, size: 40),
+        alignment: Alignment.centerRight,
+        padding: const EdgeInsets.only(right: 20),
+        margin: const EdgeInsets.symmetric(
+            horizontal: 15,
+            vertical: 4), // to make the effect only behind the card
+      ),
+      onDismissed: (direction) {
+        Provider.of<Cart>(context, listen: false).removeItem(productId);
+      },
+      direction: DismissDirection.endToStart,
       child: Card(
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
         child: Padding(
