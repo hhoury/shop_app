@@ -33,6 +33,26 @@ class CartItem extends StatelessWidget {
             horizontal: 15,
             vertical: 4), // to make the effect only behind the card
       ),
+      confirmDismiss: (direction) {
+        return showDialog(
+            context: context,
+            builder: (ctx) => AlertDialog(
+                    title: const Text('Are You Sure?'),
+                    content: const Text(
+                        'Do You Want To Remove the Item from the Cart?'),
+                    actions: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.of(ctx).pop(false);
+                          },
+                          child: const Text('No')),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.of(ctx).pop(true);
+                          },
+                          child: const Text('Yes')),
+                    ]));
+      },
       onDismissed: (direction) {
         Provider.of<Cart>(context, listen: false).removeItem(productId);
       },
