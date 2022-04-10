@@ -28,8 +28,15 @@ class _EditProductPageState extends State<EditProductPage> {
 
   void _updateImageUrl() {
     if (_imageUrlFocusNode.hasFocus) {
+      if ((!_imageUrlController.text.startsWith('http') &&
+              !_imageUrlController.text.startsWith('https')) ||
+          (!_imageUrlController.text.endsWith('.png') &&
+              !_imageUrlController.text.endsWith('jpeg') &&
+              !_imageUrlController.text.endsWith('jpg'))) {
+        return;
+      }
       setState(() {});
-    } else {}
+    }
   }
 
   @override
@@ -43,6 +50,10 @@ class _EditProductPageState extends State<EditProductPage> {
   }
 
   void _saveForm() {
+    final isValid = _form.currentState!.validate();
+    if (!isValid) {
+      return;
+    }
     _form.currentState!.save();
     print(_editedProduct.id);
     print(_editedProduct.title);
@@ -84,6 +95,13 @@ class _EditProductPageState extends State<EditProductPage> {
                     imageUrl: _editedProduct.imageUrl,
                   );
                 },
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please Provide a title';
+                  } else {
+                    return null;
+                  }
+                },
               ),
               TextFormField(
                 focusNode: _priceFocusNode,
@@ -105,6 +123,18 @@ class _EditProductPageState extends State<EditProductPage> {
                     imageUrl: _editedProduct.imageUrl,
                   );
                 },
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please enter a price';
+                  }
+                  if (double.tryParse(value) == null) {
+                    return 'please enter a valid number';
+                  }
+                  if (double.parse(value) <= 0) {
+                    return 'please enter a number greater than 0';
+                  }
+                  return null;
+                },
               ),
               TextFormField(
                 focusNode: _descriptionFocusNode,
@@ -120,6 +150,15 @@ class _EditProductPageState extends State<EditProductPage> {
                       description: value!,
                       price: _editedProduct.price,
                       imageUrl: _editedProduct.imageUrl);
+                },
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'please enter a description';
+                  }
+                  if (value.length < 10) {
+                    return 'should be at least 10 characters long';
+                  }
+                  return null;
                 },
               ),
               Row(
@@ -156,6 +195,18 @@ class _EditProductPageState extends State<EditProductPage> {
                           price: _editedProduct.price,
                           imageUrl: value!,
                         );
+                      },
+                      validator: (value) {
+                        if (value!.isEmpty) return 'please enter an image url';
+                        if (!value.startsWith('http')) {
+                          return 'please enter a valid url';
+                        }
+                        if (!value.endsWith('.png') ||
+                            !value.endsWith('jpeg') ||
+                            !value.endsWith('jpg')) {
+                          return 'please enter a valid image';
+                        }
+                        return null;
                       },
                     ),
                   ),
