@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:shop_app/screens/user_products_screen.dart';
 import '../screens/orders_screen.dart';
