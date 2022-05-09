@@ -93,7 +93,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
     _imageUrlFocusNode.dispose();
   }
 
-  void _saveForm() {
+  Future<void> _saveForm() async {
     final isValid = _form.currentState?.validate();
     if (isValid == null || isValid == false) {
       return;
@@ -109,14 +109,29 @@ class _EditProductScreenState extends State<EditProductScreen> {
         _isLoading = false;
       });
     } else {
-      Provider.of<Products>(context, listen: false)
-          .addProduct(_editedProduct)
-          .then((_) {
+      try {
+        await Provider.of<Products>(context, listen: false)
+            .addProduct(_editedProduct);
+      } catch (error) {
+        await showDialog<void>(
+            context: context,
+            builder: (ctx) => AlertDialog(
+                  title: const Text('An error occured'),
+                  content: const Text('Something went wrong!'),
+                  actions: [
+                    TextButton(
+                        onPressed: () {
+                          Navigator.of(ctx).pop();
+                        },
+                        child: const Text('Okay'))
+                  ],
+                ));
+      } finally {
         setState(() {
           _isLoading = false;
         });
         Navigator.of(context).pop();
-      });
+      }
     }
   }
 
@@ -270,8 +285,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
                               );
                             },
                             validator: (value) {
-                              if (value!.isEmpty)
+                              if (value!.isEmpty) {
                                 return 'please enter an image url';
+                              }
                               if (!value.startsWith('http') ||
                                   !value.startsWith('https')) {
                                 return 'please enter a valid url';
