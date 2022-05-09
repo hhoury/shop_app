@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import './pages/orders_page.dart';
+import './screens/orders_screen.dart';
 import './providers/orders.dart';
-import './pages/cart_page.dart';
-import './pages/product_detail_page.dart';
+import './screens/cart_screen.dart';
+import './screens/product_detail_screen.dart';
 import './providers/cart.dart';
-import './pages/products_overview_page.dart';
+import './screens/products_overview_screen.dart';
 import './providers/products.dart';
-import './pages/user_products_page.dart';
-import './pages/edit_product_page.dart';
+import './screens/user_products_screen.dart';
+import './screens/edit_product_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -36,13 +36,13 @@ class MyApp extends StatelessWidget {
               .copyWith(secondary: Colors.deepOrange),
           fontFamily: 'Lato',
         ),
-        home: ProductsOverviewPage(),
+        home: ProductsOverviewScreen(),
         routes: {
-          ProductDetailPage.routeName: (context) => ProductDetailPage(),
-          CartPage.routeName: (context) => CartPage(),
-          OrdersPage.routeName: (context) => OrdersPage(),
-          UserProductsPage.routeName: (context) => const UserProductsPage(),
-          EditProductPage.routeName: (context) => EditProductPage(),
+          ProductDetailScreen.routeName: (context) => ProductDetailScreen(),
+          CartScreen.routeName: (context) => CartScreen(),
+          OrdersScreen.routeName: (context) => OrdersScreen(),
+          UserProductsScreen.routeName: (context) => const UserProductsScreen(),
+          EditProductScreen.routeName: (context) => EditProductScreen(),
         },
       ),
     );

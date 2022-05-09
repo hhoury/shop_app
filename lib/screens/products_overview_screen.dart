@@ -2,22 +2,22 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../pages/cart_page.dart';
 import '../widgets/app_drawer.dart';
 import '../providers/cart.dart';
 import '../widgets/badge.dart';
 import '../widgets/products_grid.dart';
+import './cart_screen.dart';
 
 // ignore: constant_identifier_names
 enum FilterOptions { Favorites, All }
 
 // ignore: use_key_in_widget_constructors
-class ProductsOverviewPage extends StatefulWidget {
+class ProductsOverviewScreen extends StatefulWidget {
   @override
-  State<ProductsOverviewPage> createState() => _ProductsOverviewPageState();
+  State<ProductsOverviewScreen> createState() => _ProductsOverviewScreenState();
 }
 
-class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
+class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   // const String routeName = '/products-overview';
   var _showOnlyFavorites = false;
   @override
@@ -56,7 +56,7 @@ class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
             ),
             child: IconButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed(CartPage.routeName);
+                  Navigator.of(context).pushNamed(CartScreen.routeName);
                 },
                 icon: Icon(Icons.shopping_cart)),
           ),

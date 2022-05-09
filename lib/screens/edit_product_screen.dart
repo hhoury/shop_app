@@ -3,14 +3,14 @@ import 'package:provider/provider.dart';
 import '../providers/products.dart';
 import '../providers/product.dart';
 
-class EditProductPage extends StatefulWidget {
+class EditProductScreen extends StatefulWidget {
   static const routeName = '/edit-product';
 
   @override
-  State<EditProductPage> createState() => _EditProductPageState();
+  State<EditProductScreen> createState() => _EditProductScreenState();
 }
 
-class _EditProductPageState extends State<EditProductPage> {
+class _EditProductScreenState extends State<EditProductScreen> {
   final _priceFocusNode = FocusNode();
   final _descriptionFocusNode = FocusNode();
   final _imageUrlController = TextEditingController();

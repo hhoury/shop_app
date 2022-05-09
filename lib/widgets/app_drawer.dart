@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../pages/user_products_page.dart';
-import '../pages/orders_page.dart';
+import 'package:shop_app/screens/user_products_screen.dart';
+import '../screens/orders_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -25,7 +25,8 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.payment),
             title: const Text('Orders'),
             onTap: () {
-              Navigator.of(context).pushReplacementNamed(OrdersPage.routeName);
+              Navigator.of(context)
+                  .pushReplacementNamed(OrdersScreen.routeName);
             },
           ),
           const Divider(),
@@ -34,7 +35,7 @@ class AppDrawer extends StatelessWidget {
             title: const Text('Manage Products'),
             onTap: () {
               Navigator.of(context)
-                  .pushReplacementNamed(UserProductsPage.routeName);
+                  .pushReplacementNamed(UserProductsScreen.routeName);
             },
           ),
         ],
