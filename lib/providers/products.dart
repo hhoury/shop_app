@@ -50,10 +50,12 @@ class Products with ChangeNotifier {
     return _items.where((element) => element.isFavorite).toList();
   }
 
-  void addProduct(Product product) {
+  Future<void> addProduct(Product product) {
     final url = Uri.parse(
         'https://shop-app-99d19-default-rtdb.firebaseio.com/products.json');
-    http
+    // final uurl = Uri.https(
+    //     'https://shop-app-99d19-default-rtdb.firebaseio.com', '/products.json');
+    return http
         .post(
       url,
       body: json.encode({
