@@ -21,12 +21,12 @@ class Product with ChangeNotifier {
     required this.imageUrl,
     this.isFavorite = false,
   });
-  void toggleFavoriteStatus() async {
+  Future<void> toggleFavoriteStatus(String token) async {
     final oldStatus = isFavorite;
     isFavorite = !isFavorite;
     notifyListeners();
     final url = Uri.parse(
-        'https://shop-app-99d19-default-rtdb.firebaseio.com/products/$id.json');
+        'https://shop-app-99d19-default-rtdb.firebaseio.com/products/$id.json?auth=$token');
 
     try {
       final res =
