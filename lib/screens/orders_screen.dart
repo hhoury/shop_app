@@ -30,7 +30,6 @@ class _OrdersScreenState extends State<OrdersScreen> {
   // @override
   @override
   Widget build(BuildContext context) {
-    print('build orders screen');
     // final orderData = Provider.of<Orders>(context);
     return Scaffold(
         appBar: AppBar(
