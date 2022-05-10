@@ -59,4 +59,11 @@ class Auth with ChangeNotifier {
     return _authenticate(email, password,
         'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCYDne2gYKeLnjtYYAxA28jCQZ3pC1w2X8');
   }
+
+  void logout() {
+    _token = '';
+    _userId = '';
+    _expiryDate = null;
+    notifyListeners();
+  }
 }
